@@ -20,9 +20,9 @@ The script processes an aerial image through the following steps:
 
 | Sample Image | Output Image |
 |-------------|-------------|
-| ![000000079](https://github.com/user-attachments/assets/5ae01f72-aa1f-4149-a275-d16b7e0d72cb) | ![000000079_output](https://github.com/user-attachments/assets/57536561-666b-48dd-9070-0aab571feb83) |
-| ![000000136](https://github.com/user-attachments/assets/4ffa0818-c67f-4938-904d-3088f3340d88) | ![000000136_output](https://github.com/user-attachments/assets/1655ffa6-ab45-42b4-9d8e-dd1b0f8ab501) |
-| ![000000216](https://github.com/user-attachments/assets/27b4eaea-f3b3-4e44-9842-acf534228613) | ![000000216_output](https://github.com/user-attachments/assets/27a2160d-f091-46d1-83eb-344fef1a5b0b) |
+| ![000000079](https://yourkln.com/assets/000000079.jpg) | ![000000079_output](https://yourkln.com/assets/000000079_output.jpg) |
+| ![000000136](https://yourkln.com/assets/000000136.jpg) | ![000000136_output](https://yourkln.com/assets/000000136_output.jpg) |
+| ![000000216](https://yourkln.com/assets/000000216.jpg) | ![000000216_output](https://yourkln.com/assets/000000216_output.jpg) |
 
 
 
