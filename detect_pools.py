@@ -13,7 +13,7 @@ args = parser.parse_args()
 def detect_pools(image):
     """Applies refined pool detection relying on YOLO's initial detection."""
 
-    filtered = cv2.edgePreservingFilter(image, flags=1, sigma_s=60, sigma_r=0.4)
+    filtered = cv2.edgePreservingFilter(image, flags=1, sigma_s=60, sigma_r=0.4) # works good for some and bad for some
     hsv = cv2.cvtColor(filtered, cv2.COLOR_BGR2HSV)
     lower_blue = np.array([80, 60, 80])
     upper_blue = np.array([120, 255, 255])
