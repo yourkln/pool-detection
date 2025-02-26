@@ -10,19 +10,20 @@ The script processes an aerial image through the following steps:
 2. **YOLO-Based Initial Detection**: A fine-tuned YOLOv11n model (`best.pt`) predicts potential swimming pool regions, providing bounding boxes around likely pool areas.
 3. **Bounding Box Enlargement**: Each bounding box is enlarged by a factor of 0.3 (30%) to ensure the entire pool is captured, even if the initial detection misses parts of it. The enlarged region of interest (ROI) is then cropped for further processing.
 4. **Color Segmentation on ROI**: The cropped ROI is converted to HSV color space, and a mask is created to isolate blue/turquoise pixels (hue: 80–120, saturation: 60–255, value: 80–255), characteristic of pool water.
-5. **Noise Removal**: Morphological operations are applied to the mask:
+5. **Edge-Aware Filtering:** This filter smooths the image to reduce noise while preserving important edges. By maintaining sharp boundaries, it helps subsequent segmentation steps—such as color thresholding and contour detection—more accurately capture the intricate outlines of irregularly shaped pools. (This really improved the outlining in some cases) 
+6. **Noise Removal**: Morphological operations are applied to the mask:
    - **Opening**: Performed with a 3x3 kernel (2 iterations) to remove small noise (e.g., isolated blue pixels).
    - **Closing**: Performed with a 3x3 kernel (3 iterations) to fill gaps in pool areas (e.g., caused by shadows or reflections).
    - I found these values to be the best
-6. **Contour Detection and Filtering**: Contours are extracted from the cleaned mask and filtered based on:
+7. **Contour Detection and Filtering**: Contours are extracted from the cleaned mask and filtered based on:
    - **Area**: Between 200 and 30,000 pixels to include small and large pools while excluding tiny noise or oversized non-pool regions.
    - **Shape**: Contours are smoothed using `cv2.approxPolyDP` with an epsilon of 0.001 times the contour’s arc length, ensuring accurate boundaries for irregular pool shapes.
-7. **Output Generation**: Valid contours are drawn in red (1-pixel thickness) on the cropped ROI. These contours are then overlaid back onto the original image, with their coordinates adjusted to be relative to the full image. The annotated image and all pool boundary coordinates are saved to files.
+8. **Output Generation**: Valid contours are drawn in red (1-pixel thickness) on the cropped ROI. These contours are then overlaid back onto the original image, with their coordinates adjusted to be relative to the full image. The annotated image and all pool boundary coordinates are saved to files.
 
 ### Changes Made
 - **Integrated YOLO Model**: Replaced the original standalone color-based detection with a YOLOv11n model (`best.pt`) for initial pool detection, improving reliability by focusing on likely pool regions before applying traditional CV techniques.
 - **Bounding Box Enlargement**: Added a 30% enlargement of YOLO bounding boxes to capture entire pools, addressing cases where initial detections might be too tight.
-- **Refined Contour Processing**: Updated the `detect_pools` function to process ROIs from YOLO detections, applying color segmentation, morphological operations (with specific iteration counts: 2 for opening, 3 for closing), and contour smoothing with `cv2.approxPolyDP`.
+- **Refined Contour Processing**: Updated the `detect_pools` function to process ROIs from YOLO detections, applying Edge-Aware Filtering then color segmentation, morphological operations (with specific iteration counts: 2 for opening, 3 for closing), and contour smoothing with `cv2.approxPolyDP`.
 - **Removed Texture and Shape Filters**: Eliminated previous texture filtering (Laplacian) and shape constraints (circularity, color uniformity) from the original pipeline, relying instead on YOLO’s initial detection and area-based contour filtering.
 
 **Examples**:
