@@ -30,6 +30,7 @@ The script processes an aerial image through the following steps:
 
 | Sample Image | Output Image |
 |-------------|-------------|
+| ![000000216](https://yourkln.com/assets/07.jpg) | ![000000216_output](https://yourkln.com/assets/07_output.jpg) |
 | ![000000079](https://yourkln.com/assets/000000079.jpg) | ![000000079_output](https://yourkln.com/assets/000000079_output.jpg) |
 | ![000000136](https://yourkln.com/assets/000000136.jpg) | ![000000136_output](https://yourkln.com/assets/000000136_output.jpg) |
 | ![000000216](https://yourkln.com/assets/000000216.jpg) | ![000000216_output](https://yourkln.com/assets/000000216_output.jpg) |
